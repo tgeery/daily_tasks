@@ -37,13 +37,16 @@ def add_to_history(key, ts):
         f.write("{}={}\n".format(key, int(ts)))
 
 
-def iterate_objs(json_dat, curr_time, el):
+def iterate_objs(json_dat, curr_time, el, path=[]):
     for obj in json_dat:
         if type(json_dat[obj]) != int:
-            el.addParent(obj)
-            iterate_objs(json_dat[obj], curr_time, el)
+            path.append(obj)
+            iterate_objs(json_dat[obj], curr_time, el, path)
+            path.remove(obj)
         else:
             if obj == el.key:
+                if len(path) > 0:
+                    el.addParent(path)
                 el.setValue(curr_time.timestamp())
                 add_to_history(obj, curr_time.timestamp())
 
