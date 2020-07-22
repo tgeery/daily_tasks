@@ -12,7 +12,7 @@ Store tasks as daily(in repeating.json) or once in a while(in unique.json). The 
 &nbsp;&nbsp;"thehill": 0<br/>
 }<br/>
 
-Two operations exist: todo - displays summary, mark - updates history<br/>
+Two operations exist: todo - displays summary, mark - updates history, schedule - add unique task<br/>
 python3 mark.py gdc<br/>
 python3 todo.py<br/>
 &nbsp;&nbsp;Still need to do:<br/>
@@ -22,3 +22,4 @@ python3 todo.py<br/>
 
 &nbsp;&nbsp;Congrats completing:<br/>
 &nbsp;&nbsp;gdc at 12:56:6
+&nbsp;&nbsp;python3 schedule.py interview 07/22/2020T12:00:00
