@@ -41,14 +41,18 @@ def iterate_objs(json_dat, curr_time, el, path=[]):
     for obj in json_dat:
         if type(json_dat[obj]) != int:
             path.append(obj)
-            iterate_objs(json_dat[obj], curr_time, el, path)
+            if iterate_objs(json_dat[obj], curr_time, el, path):
+                return True
             path.remove(obj)
         else:
             if obj == el.key:
                 if len(path) > 0:
-                    el.addParent(path)
+                    for p in path:
+                        el.addParent(p)
                 el.setValue(curr_time.timestamp())
                 add_to_history(obj, curr_time.timestamp())
+                return True
+    return False
 
 
 if __name__ == "__main__":
@@ -62,6 +66,7 @@ if __name__ == "__main__":
             with open("repeating.json", "w") as f:
                 obj = repeat_json
                 for p in el.getParents():
-                    obj = obj[p]
+                    if len(p) > 0:
+                        obj = obj[p]
                 obj[el.getKey()] = el.getValue()
                 json.dump(repeat_json, f)
